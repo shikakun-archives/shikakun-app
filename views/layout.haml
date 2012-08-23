@@ -1,0 +1,52 @@
+!!!
+%html{ lang: "ja", dir: "ltr" }
+  %head
+    %meta{ charset: "UTF-8" }
+    %meta{ name: "viewport", content: "width=device-width, initial-scale=1.0" }
+    %meta{ name: "keywords", content: "shikakun" }
+    %meta{ name: "description", content: "shikakun" }
+    %title shikakun
+    %link{ rel: "stylesheet", type: "text/css", media: "screen", href: "/css/bootstrap.min.css" }
+    %link{ rel: "stylesheet", type: "text/css", media: "screen", href: "/css/bootstrap-responsive.min.css" }
+    %link{ rel: "stylesheet", type: "text/css", media: "screen", href: "/stylesheet.css" }
+    %script{ type: "text/javascript", src: "http://www.google.com/jsapi" }
+    %script{ type: "text/javascript" } google.load("jquery","1");
+    %script{ type: "text/javascript", src: "/js/bootstrap.min.js" }
+    %script{ type: "text/javascript", src: "/js/js.js" }
+    <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  %body
+    %div.container
+      %div.row
+        %header#header.span3
+          %hgroup
+            %h1 shikakun
+            %h6 For become a bot
+        %article#content.span6
+          != yield
+        %div#nickname.span3
+          - if session["nickname"].nil? == false
+            %h3
+              = session["nickname"]
+            %nav
+              %a.btn{ href: "/logout" } ログアウト
+              %button#cancel.btn やめる
+      %div.row
+        %div#status.span6.offset3
+          %div#preview.bubble.hidden-phone
+            =styled_flash
+            - if session["nickname"].nil?
+              shikakunに参加すると、あなたはshikakunになります。
+              %br
+              他のshikakunにメッセージを送ることもできます。
+              %br
+              %a.btn{ href: "/auth/twitter" } shikakunに参加する
+          %img#shikakun{ src: "/img/shikakun.jpg", alt: "shikakun" }
+        %div#users.span3
+          %ul.span3
+            - if session["nickname"].nil?
+              %li shikakunに参加中のshikakun
+            - @users.each do |users|
+              %li #{users.nickname}
+      %div.row
+        %footer.span12
+          &copy; 2012 shikakun

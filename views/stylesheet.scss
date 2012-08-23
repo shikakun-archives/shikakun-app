@@ -1,0 +1,163 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,700");
+
+html {
+	font-size: 90%;
+	-webkit-text-size-adjust: 100%;
+	-ms-text-size-adjust: 100%;
+}
+
+body {	
+	color: #000000;
+	font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+	font-size: 100%;
+}
+
+a {
+	color: #000000;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #000000;
+	text-decoration: none;
+}
+
+textarea {  
+  font-size: 140%;
+  height: 5em;
+}
+
+.container {
+  padding: 40px 0;
+}
+
+.row {
+  margin-bottom: 20px;
+}
+
+#header {
+  min-height: 80px;
+}
+
+#header h1 {
+  margin-bottom: 0.2em;
+  
+  line-height: 1;
+}
+
+#preview {
+  position: relative;
+  width: 510px;
+  padding: 30px;
+  word-wrap: break-word;
+  
+  line-height: 1.8;
+}
+
+@media screen and (max-width: 1200px){
+  #preview {
+    width: 400px;
+  }
+}
+
+@media screen and (max-width: 980px){
+  #preview {
+    width: 320px;
+    padding: 16px;
+  }
+}
+
+.bubble {
+  background-color: #eee;
+  border-radius: 6px;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+}
+
+.bubble:after {
+  content: "";
+  position: absolute;
+  bottom: -18px;
+  left: 36px;
+  width: 0;
+  height: 0;
+  border-top: 18px solid #eee;
+  border-right: 24px solid transparent;
+}
+
+#shikakun {
+  width: 72px;
+  height: auto;
+  margin-top: 24px;
+  
+  border-radius: 6px;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+}
+
+#users {
+  position: relative;
+}
+
+#users h3 {
+  position: absolute;
+  top: -46px;
+  left: 0;
+  height: 40px;
+  padding: 0 20px;
+  
+  font-size: 100%;
+  font-weight: normal;
+  line-height: 40px;
+}
+
+#users h3.bubble:after {
+  bottom: -12px;
+  left: 24px;
+  border-top: 12px solid #eee;
+  border-right: 18px solid transparent;
+}
+
+#users ul {
+  margin-left: 0;
+}
+
+#users li {
+  float: left;
+  margin: 0 1em 1em 0;
+  display: block;
+  
+  list-style-type: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+background: linear-gradient(top, #f19baf 0%, #ffffff 100%);
+background: -o-linear-gradient(top, #f19baf 0%, #ffffff 100%);
+background: -moz-linear-gradient(top, #f19baf 0%, #ffffff 100%);
+background: -webkit-linear-gradient(top, #f19baf 0%, #ffffff 100%);
+background: -ms-linear-gradient(top, #f19baf 0%, #ffffff 100%);
+
+background: url('') repeat no-repeat repeat-x repeat-y;
+background-color: #ffffff;
+background-image: url('');
+background-repeat: repeat no-repeat repeat-x repeat-y;
+list-style-type: disc;
+
+@media screen and (max-width: 640px){
+
+}
+*/
