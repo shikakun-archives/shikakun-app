@@ -15,12 +15,15 @@
     %script{ type: "text/javascript", src: "/js/js.js" }
     <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
   %body
+    %div#loading
+      %div.container
+        %h1#loading-message shikaloading.
     %div.container
       %div.row
         %header#header.span3
           %hgroup
             %h1 shikakun
-            %h6 For become a bot
+            %h6 Semitransparent bot
         %article#content.span6
           != yield
         %div#nickname.span3
@@ -28,10 +31,12 @@
             %h3
               = session["nickname"]
             %nav
-              %a.btn{ href: "/logout" } ログアウト
+              %a.btn.loading{ href: "/logout" } ログアウト
               %button#cancel.btn やめる
       %div.row
-        %div#status.span6.offset3
+        %div#icon.span3
+          %img#shikakun{ src: "/img/shikakun.jpg", alt: "shikakun" }
+        %div#status.span6
           %div#preview.bubble.hidden-phone
             =styled_flash
             - if session["nickname"].nil?
@@ -39,8 +44,7 @@
               %br
               他のshikakunにメッセージを送ることもできます。
               %br
-              %a.btn{ href: "/auth/twitter" } shikakunに参加する
-          %img#shikakun{ src: "/img/shikakun.jpg", alt: "shikakun" }
+              %a.btn.loading{ href: "/auth/twitter" } shikakunに参加する
         %div#users.span3
           %ul.span3
             - if session["nickname"].nil?
@@ -49,4 +53,4 @@
               %li #{users.nickname}
       %div.row
         %footer.span12
-          &copy; 2012 shikakun
+          &copy; shikakun

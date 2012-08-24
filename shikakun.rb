@@ -71,7 +71,7 @@ get '/join' do
       flash.next[:info] = shikatification
       redirect '/'
     else
-      flash.next[:info] = "鹿 さん、 #{session["nickname"]} さんがshikakunにログインしました"
+      flash.next[:info] = "鹿 さん、 #{session["nickname"]} さんがまたshikakunになりました"
       redirect '/'
     end
   end
@@ -96,7 +96,7 @@ end
 
 post "/tweet" do
   if session["nickname"].nil?
-    flash.next[:info] = "ログインしてください"
+    flash.next[:info] = "shikakunになるにはログインしてください"
     redirect '/'
   elseif request["to"].nil?
     flash.next[:info] = "ひとりごとは書けません"
@@ -107,8 +107,9 @@ post "/tweet" do
       redirect '/'
     else
       shikatification = request["to"] + " " + request["message"]
-      flash.next[:info] = shikatification
-      redirect '/'
+      twitter_client = Twitter::Client.new
+      # twitter_client.update(shikatification)
+      redirect 'http://twitter.com/shikakun'
     end
   end
 end
