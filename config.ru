@@ -5,10 +5,6 @@ Bundler.require
 
 set :haml, :format => :html5
 
-get '/stylesheet.css' do
-  scss :stylesheet
-end
-
 envfile = File.expand_path(File.join(Dir.pwd, ".env"))
 
 if File.exists?(envfile)
