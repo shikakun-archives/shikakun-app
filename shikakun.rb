@@ -3,10 +3,10 @@
 Sequel::Model.plugin(:schema)
 
 db = {
-  user:     ENV['USER'].chomp,
-  dbname:   ENV['DBNAME'].chomp,
-  password: ENV['PASSWORD'].chomp,
-  host:     ENV['HOST'].chomp
+  user:     ENV['USER'],
+  dbname:   ENV['DBNAME'],
+  password: ENV['PASSWORD'],
+  host:     ENV['HOST']
 }
 
 # Sequel.connect("sqlite://users.db")
@@ -23,7 +23,7 @@ end
 
 use Rack::Session::Cookie,
   :key => 'rack.session',
-  :domain => '127.0.0.1',
+  :domain => 'www.shikakun.com',
   :path => '/',
   :expire_after => 3600,
   :secret => ENV['SESSION_SECRET']
