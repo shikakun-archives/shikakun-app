@@ -9,8 +9,10 @@ db = {
   host:     ENV['HOST']
 }
 
-# Sequel.connect("sqlite://users.db")
-DB = Sequel.connect("mysql2://#{db[:user]}:#{db[:password]}@#{db[:host]}/#{db[:dbname]}")
+# development
+DB = Sequel.connect("sqlite://users.db")
+# production
+# DB = Sequel.connect("mysql2://#{db[:user]}:#{db[:password]}@#{db[:host]}/#{db[:dbname]}")
 
 class Users < Sequel::Model
   unless table_exists?
@@ -23,7 +25,7 @@ end
 
 use Rack::Session::Cookie,
   :key => 'rack.session',
-  :domain => 'www.shikakun.com',
+  :domain => '127.0.0.1',
   :path => '/',
   :expire_after => 3600,
   :secret => ENV['SESSION_SECRET']
@@ -67,7 +69,7 @@ get '/join' do
       Users.find_or_create(:nickname => session["nickname"])
       shikatification = "鹿 さん、 #{session["nickname"]} さんがshikakunに参加しました"
       twitter_client = Twitter::Client.new
-      twitter_client.update(shikatification)
+      # twitter_client.update(shikatification)
       flash.next[:info] = shikatification
       redirect '/'
     else
@@ -84,7 +86,7 @@ get "/cancel" do
     Users.filter(:nickname => session["nickname"]).delete
     shikatification = "鹿 さん、 #{session["nickname"]} さんがshikakunをやめました"
     twitter_client = Twitter::Client.new
-    twitter_client.update(shikatification)
+    # twitter_client.update(shikatification)
     redirect '/logout'
   end
 end
@@ -108,7 +110,7 @@ post "/tweet" do
     else
       shikatification = request["to"] + " " + request["message"]
       twitter_client = Twitter::Client.new
-      twitter_client.update(shikatification)
+      # twitter_client.update(shikatification)
       redirect 'http://twitter.com/shikakun'
     end
   end
