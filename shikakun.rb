@@ -64,6 +64,9 @@ end
 get '/join' do
   if session["nickname"].nil?
     redirect '/'
+  elsif session["nickname"] == "shikakun"
+    flash.next[:info] = "鹿 だ!!"
+    redirect '/'
   else
     if Users.filter(nickname: session["nickname"]).empty?
       Users.find_or_create(:nickname => session["nickname"])
@@ -82,6 +85,8 @@ end
 get "/cancel" do
   if session["nickname"].nil?
     redirect '/'
+  elsif session["nickname"] == "shikakun"
+    redirect '/logout'
   else
     Users.filter(:nickname => session["nickname"]).delete
     shikatification = "鹿 さん、 #{session["nickname"]} さんがshikakunをやめました"
@@ -100,7 +105,7 @@ post "/tweet" do
   if session["nickname"].nil?
     flash.next[:info] = "shikakunになるにはログインしてください"
     redirect '/'
-  elseif request["to"].nil?
+  elsif request["to"].nil?
     flash.next[:info] = "ひとりごとは書けません"
     redirect '/'
   else
