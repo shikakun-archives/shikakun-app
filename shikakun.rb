@@ -1,5 +1,8 @@
 # coding: utf-8
 
+require 'rack/env'
+use Rack::Env unless ENV['RACK_ENV'] == 'production'
+
 Sequel::Model.plugin(:schema)
 
 db = {
