@@ -76,7 +76,7 @@ get '/join' do
       Users.find_or_create(:nickname => session["nickname"])
       shikatification = "鹿 さん、 #{session["nickname"]} さんがshikakunに参加しました"
       twitter_client = Twitter::Client.new
-      # twitter_client.update(shikatification)
+      twitter_client.update(shikatification) if mode == 'production'
       flash.next[:info] = shikatification
       redirect '/'
     else
@@ -95,7 +95,7 @@ get "/cancel" do
     Users.filter(:nickname => session["nickname"]).delete
     shikatification = "鹿 さん、 #{session["nickname"]} さんがshikakunをやめました"
     twitter_client = Twitter::Client.new
-    # twitter_client.update(shikatification)
+    twitter_client.update(shikatification) if mode == 'production'
     redirect '/logout'
   end
 end
@@ -119,7 +119,7 @@ post "/tweet" do
     else
       shikatification = request["to"] + " " + request["message"]
       twitter_client = Twitter::Client.new
-      # twitter_client.update(shikatification)
+      twitter_client.update(shikatification) if mode == 'production'
       redirect 'http://twitter.com/shikakun'
     end
   end
