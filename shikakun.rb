@@ -109,7 +109,7 @@ post "/tweet" do
     flash.next[:info] = "ひとりごとは書けません"
     redirect '/'
   else
-    if Users.filter(nickname: session["nickname"]).empty?
+    if Users.filter(nickname: session["nickname"]).empty? && session["nickname"] != "shikakun"
       flash.next[:info] = "そんな人いません"
       redirect '/'
     else
