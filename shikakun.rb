@@ -1,5 +1,8 @@
 # coding: utf-8
 
+# mode development/production
+mode = "development"
+
 Sequel::Model.plugin(:schema)
 
 db = {
@@ -9,10 +12,11 @@ db = {
   host:     ENV['HOST']
 }
 
-# development
-DB = Sequel.connect("sqlite://users.db")
-# production
-# DB = Sequel.connect("mysql2://#{db[:user]}:#{db[:password]}@#{db[:host]}/#{db[:dbname]}")
+if mode == 'development'
+  DB = Sequel.connect("sqlite://users.db")
+elsif mode == 'production'
+  DB = Sequel.connect("mysql2://#{db[:user]}:#{db[:password]}@#{db[:host]}/#{db[:dbname]}")
+end
 
 class Users < Sequel::Model
   unless table_exists?
