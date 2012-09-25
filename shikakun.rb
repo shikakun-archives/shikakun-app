@@ -29,7 +29,7 @@ end
 
 use Rack::Session::Cookie,
   :key => 'rack.session',
-  :domain => 'www.shikakun.com',
+  :domain => 'www.shikakun.com', # development 127.0.0.1
   :path => '/',
   :expire_after => 3600,
   :secret => ENV['SESSION_SECRET']
