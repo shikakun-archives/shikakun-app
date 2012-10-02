@@ -3,9 +3,11 @@
     %li.active
       %a{ href: "/" } Reply
     %li
-      %a{ href: "/pork" } Pork
+      %a{ href: "/pokes" } Poke
     %li
-      %a{ href: "/pro" } Pro
+      %a{ href: "/pro" }
+        Tweet
+        %span.label Pro
 %form{ action: "/tweet", method: "post" }
   %select{ name: "to", id: "to" }
     - @users.each do |users|
