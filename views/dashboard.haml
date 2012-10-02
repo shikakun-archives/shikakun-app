@@ -1,3 +1,11 @@
+%nav
+  %ul.nav.nav-tabs
+    %li.active
+      %a{ href: "/" } Reply
+    %li
+      %a{ href: "/pork" } Pork
+    %li
+      %a{ href: "/pro" } Pro
 %form{ action: "/tweet", method: "post" }
   %select{ name: "to", id: "to" }
     - @users.each do |users|

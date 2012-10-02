@@ -48,6 +48,15 @@ textarea {
   line-height: 1;
 }
 
+#content .nav.nav-tabs {
+  margin-bottom: 30px;
+}
+
+#content .nav.nav-tabs li a {
+  padding-right: 24px;
+  padding-left: 24px;
+}
+
 .tweet-submit {
   width: 100%;
   margin: 0 auto;
