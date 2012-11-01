@@ -115,6 +115,28 @@ textarea {
   -webkit-border-radius: 6px;
 }
 
+#preview {
+  margin-bottom: 20px;
+}
+
+#ad {
+  padding: 20px 0;
+}
+
+#ad figcaption {
+  padding: 20px 0;
+}
+
+#ad figcaption h3 {
+  margin-bottom: 10px;
+  
+  font-weight: normal;
+}
+
+#ad figcaption a {
+  color: #0099fa;
+}
+
 #users {
   position: relative;
 }
