@@ -1,5 +1,4 @@
 .bundle
 .DS_Store
-.env
 .sass-cache
 users.db
