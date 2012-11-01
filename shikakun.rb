@@ -1,7 +1,7 @@
 # coding: utf-8
 
 # mode development/production
-mode = "production"
+mode = "develop"
 
 Sequel::Model.plugin(:schema)
 
