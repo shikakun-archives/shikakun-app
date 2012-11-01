@@ -14,8 +14,10 @@ db = {
 
 if mode == 'development'
   DB = Sequel.connect("sqlite://users.db")
+  DOMAIN = "127.0.0.1"
 elsif mode == 'production'
   DB = Sequel.connect("mysql2://#{db[:user]}:#{db[:password]}@#{db[:host]}/#{db[:dbname]}")
+  DOMAIN = "www.shikakun.com"
 end
 
 class Users < Sequel::Model
@@ -29,7 +31,7 @@ end
 
 use Rack::Session::Cookie,
   :key => 'rack.session',
-  :domain => 'www.shikakun.com', # development 127.0.0.1
+  :domain => DOMAIN,
   :path => '/',
   :expire_after => 3600,
   :secret => ENV['SESSION_SECRET']
