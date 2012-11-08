@@ -45,16 +45,6 @@
               他のshikakunにメッセージを送ることもできます。
               %br
               %a.btn.loading{ href: "/auth/twitter" } shikakunに参加する
-          %figure#ad
-            %a{ href: "http://idpw.org/fest/blackmarket/", target: "_blank"}
-              %img{ src: "http://idpw.org/fest/blackmarket/yami.jpeg", alt: "インターネットヤミ市" }
-            %figcaption
-              %h3 インターネットヤミ市に出店します！
-              %p
-                ご来場いただいた方のお手持ちのデバイスで
-                %br
-                shikakun が Twitter にログインします。
-                %a{ href: "http://idpw.org/fest/blackmarket/", target: "_blank"} 詳細はこちら
         %div#users.span3
           %ul.span3
             - if session["nickname"].nil?
