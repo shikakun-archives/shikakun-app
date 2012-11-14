@@ -47,6 +47,10 @@ Twitter.configure do |config|
   config.oauth_token_secret = ENV['TWITTER_SHIKAKUN_TOKEN_SECRET']
 end
 
+not_found do
+  "404鹿なし"
+end
+
 get "/" do
   @users = Users.order_by(:nickname.asc)
   if session["nickname"].nil?
