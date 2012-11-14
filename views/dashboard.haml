@@ -5,7 +5,5 @@
         %option{ value: "@#{users.nickname}", selected: true } @#{users.nickname}
       - else
         %option{ value: "@#{users.nickname}" } @#{users.nickname}
-  %input{ type: "checkbox", name: "random", id: "random" }
-  %label{ for: "random" } 誰でもいい
   %textarea.span6{ name: "message", id: "message" }
   %button.btn.btn-info.tweet-submit.loading{ type: "submit" } 鹿 さんがツイート
