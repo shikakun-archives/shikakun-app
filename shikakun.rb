@@ -1,8 +1,5 @@
 # coding: utf-8
 
-# mode development/production
-mode = "production"
-
 Sequel::Model.plugin(:schema)
 
 db = {
@@ -12,10 +9,12 @@ db = {
   host:     ENV['HOST']
 }
 
-if mode == 'development'
+configure :development do
   DB = Sequel.connect("sqlite://users.db")
   DOMAIN = "127.0.0.1"
-elsif mode == 'production'
+end
+
+configure :production do
   DB = Sequel.connect("mysql2://#{db[:user]}:#{db[:password]}@#{db[:host]}/#{db[:dbname]}")
   DOMAIN = "www.shikakun.com"
 end
@@ -82,7 +81,7 @@ get '/join' do
       Users.find_or_create(:nickname => session["nickname"])
       shikatification = "鹿 さん、 #{session["nickname"]} さんがshikakunに参加しました"
       twitter_client = Twitter::Client.new
-      twitter_client.update(shikatification) if mode == 'production'
+      twitter_client.update(shikatification) if settings.environment == :production
       flash.next[:info] = shikatification
       redirect '/'
     else
@@ -101,7 +100,7 @@ get "/cancel" do
     Users.filter(:nickname => session["nickname"]).delete
     shikatification = "鹿 さん、 #{session["nickname"]} さんがshikakunをやめました"
     twitter_client = Twitter::Client.new
-    twitter_client.update(shikatification) if mode == 'production'
+    twitter_client.update(shikatification) if settings.environment == :production
     redirect '/logout'
   end
 end
@@ -125,7 +124,7 @@ post "/tweet" do
     else
       shikatification = request["to"] + " " + request["message"]
       twitter_client = Twitter::Client.new
-      twitter_client.update(shikatification) if mode == 'production'
+      twitter_client.update(shikatification)  if settings.environment == :production
       redirect 'http://twitter.com/shikakun'
     end
   end
