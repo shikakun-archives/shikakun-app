@@ -23,7 +23,6 @@
         %header#header.span3
           %hgroup
             %h1 shikakun
-            %h6 Semitransparent bot
         %article#content.span6
           != yield
         %div#nickname.span3
@@ -40,10 +39,14 @@
           %div#preview.bubble.hidden-phone
             =styled_flash
             - if session["nickname"].nil?
-              shikakunに参加すると、あなたはshikakunになります。
-              %br
-              他のshikakunにメッセージを送ることもできます。
-              %br
+              %p
+                shikakunは、shikakunに参加すると
+                %br
+                shikakunになれるサービスです。
+              %p
+                新機能追加のため、現在はshikakunを中止しています。
+                %br
+                再開の際には、shikakunでお知らせします。
               %a.btn.loading{ href: "/auth/twitter" } shikakunに参加する
         %div#users.span3
           %ul.span3

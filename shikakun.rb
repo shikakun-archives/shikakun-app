@@ -49,11 +49,7 @@ end
 
 get "/" do
   @users = Users.order_by(:nickname.asc)
-  if session["nickname"].nil?
-    haml :index
-  else
-    haml :dashboard
-  end
+  haml :index
 end
 
 get "/exit" do
@@ -105,24 +101,4 @@ end
 get "/logout" do
   session.clear
   redirect '/'
-end
-
-post "/tweet" do
-  if session["nickname"].nil?
-    flash.next[:info] = "shikakunになるにはログインしてください"
-    redirect '/'
-  elsif request["to"].nil?
-    flash.next[:info] = "ひとりごとは書けません"
-    redirect '/'
-  else
-    if Users.filter(nickname: session["nickname"]).empty? && session["nickname"] != "shikakun"
-      flash.next[:info] = "そんな人いません"
-      redirect '/'
-    else
-      shikatification = request["to"] + " " + request["message"]
-      twitter_client = Twitter::Client.new
-      twitter_client.update(shikatification)  if settings.environment == :production
-      redirect 'http://twitter.com/shikakun'
-    end
-  end
 end
