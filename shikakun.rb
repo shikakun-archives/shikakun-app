@@ -47,8 +47,28 @@ not_found do
   "404鹿なし"
 end
 
-get "/" do
+get "/pokes" do
   @users = Users.order_by(:nickname.asc)
+  usary = []
+  @users.each do |users|
+    usary << users.nickname
+  end
+  @us = usary[rand(usary.length)]
+  
+  tweets = []
+  max_id = 999999999999999999
+  prev_max_id = 0
+  
+  (1 .. 20).each do |page|
+    Twitter.user_timeline(@us, { max_id: max_id, count: 200 }).each do |tweet|
+      tweets << tweet.text
+      max_id = tweet.id
+    end
+    break if max_id == prev_max_id
+    prev_max_id = max_id
+    max_id -= 1
+  end
+  @tw = tweets[rand(tweets.length)]
   haml :index
 end
 
