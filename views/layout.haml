@@ -15,44 +15,20 @@
     %script{ type: "text/javascript", src: "/js/js.js" }
     <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
   %body
-    %div#loading
-      %div.container
-        %h1#loading-message shikaloading.
     %div.container
-      %div.row
-        %header#header.span3
-          %hgroup
-            %h1 shikakun
-        %article#content.span6
-          != yield
-        %div#nickname.span3
-          - if session["nickname"].nil? == false
-            %h3
-              = session["nickname"]
-            %nav
-              %a.btn.loading{ href: "/logout" } ログアウト
-              %button#cancel.btn やめる
-      %div.row
-        %div#icon.span3
-          %img#shikakun{ src: "/img/shikakun.jpg", alt: "shikakun" }
-        %div#status.span6
-          %div#preview.bubble.hidden-phone
-            =styled_flash
-            - if session["nickname"].nil?
-              %p
-                shikakunは、shikakunに参加すると
-                %br
-                shikakunになるサービスです。
-              %p
-                新機能追加のため、現在はshikakunを中止しています。
-                %br
-                ご迷惑をおかけいたしますが、しばらくお待ちください。
-        %div#users.span3
-          %ul.span3
-            - if session["nickname"].nil?
-              %li shikakunに参加中のshikakun
-            - @users.each do |users|
-              %li #{users.nickname}
-      %div.row
-        %footer.span12
-          &copy; shikakun
+      %div
+        =styled_flash
+      %div
+        != yield
+        - if session["nickname"].nil?
+          ようこそゲスト鹿
+          %a.btn.loading{ href: "/auth/twitter" } ログイン
+        - else
+          = session["nickname"]
+          %a.btn.loading{ href: "/logout" } ログアウト
+          %button#cancel.btn やめる
+      %ul.span3
+        - if session["nickname"].nil?
+          %li shikakunに参加中のshikakun
+        - @users.each do |users|
+          %li #{users.nickname}
