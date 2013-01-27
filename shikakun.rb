@@ -47,6 +47,15 @@ not_found do
   "404鹿なし"
 end
 
+def tweet(shikatification)
+  if settings.environment == :production
+    twitter_client = Twitter::Client.new
+    twitter_client.update(shikatification)
+  elsif settings.environment == :development
+    flash.next[:info] = shikatification
+  end
+end
+
 get "/" do
   @users = Users.order_by(:nickname.asc)
   haml :index
@@ -67,18 +76,16 @@ get '/join' do
   if session["nickname"].nil?
     redirect '/'
   elsif session["nickname"] == "shikakun"
-    flash.next[:info] = "鹿 だ!!"
+    tweet("鹿だ !!")
     redirect '/'
   else
     if Users.filter(nickname: session["nickname"]).empty?
       Users.find_or_create(:nickname => session["nickname"])
-      shikatification = "鹿 さん、 #{session["nickname"]} さんがshikakunに参加しました"
-      twitter_client = Twitter::Client.new
-      twitter_client.update(shikatification) if settings.environment == :production
+      tweet("鹿 さん、 #{session["nickname"]} さんがshikakunに参加しました")
       flash.next[:info] = shikatification
       redirect '/'
     else
-      flash.next[:info] = "鹿 さん、 #{session["nickname"]} さんがまたshikakunになりました"
+      tweet("鹿 さん、 #{session["nickname"]} さんがまたshikakunになりました")
       redirect '/'
     end
   end
@@ -91,9 +98,7 @@ get "/cancel" do
     redirect '/logout'
   else
     Users.filter(:nickname => session["nickname"]).delete
-    shikatification = "鹿 さん、 #{session["nickname"]} さんがshikakunをやめました"
-    twitter_client = Twitter::Client.new
-    twitter_client.update(shikatification) if settings.environment == :production
+    tweet("鹿 さん、 #{session["nickname"]} さんがshikakunをやめました")
     redirect '/logout'
   end
 end
