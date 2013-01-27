@@ -3,6 +3,7 @@ gem 'sinatra'
 gem 'omniauth'
 gem 'omniauth-twitter'
 gem 'haml'
+gem 'slim'
 gem 'sequel'
 gem 'twitter'
 gem 'sinatra-flash', require: "sinatra/flash"
