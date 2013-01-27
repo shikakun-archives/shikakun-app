@@ -71,16 +71,16 @@ get '/join' do
   if session["nickname"].nil?
     redirect '/'
   elsif session["nickname"] == "shikakun"
-    tweet("鹿だ !!")
+    flash.next[:info] = "鹿だ !!"
     redirect '/'
   else
     if Users.filter(nickname: session["nickname"]).empty?
       Users.find_or_create(:nickname => session["nickname"])
-      tweet("鹿 さん、 #{session["nickname"]} さんがshikakunに参加しました")
+      tweet("鹿 さん、 #{session['nickname']} さんがshikakunに参加しました")
       flash.next[:info] = shikatification
       redirect '/'
     else
-      tweet("鹿 さん、 #{session["nickname"]} さんがまたshikakunになりました")
+      tweet("鹿 さん、 #{session['nickname']} さんがまたshikakunになりました")
       redirect '/'
     end
   end
@@ -93,7 +93,7 @@ get "/cancel" do
     redirect '/logout'
   else
     Users.filter(:nickname => session["nickname"]).delete
-    tweet("鹿 さん、 #{session["nickname"]} さんがshikakunをやめました")
+    tweet("鹿 さん、 #{session['nickname']} さんがshikakunをやめました")
     redirect '/logout'
   end
 end
