@@ -18,15 +18,16 @@ html lang="ja" dir="ltr"
   body
     div.container
       == styled_flash
-      div
-        == yield
+      header#header
+        h1 shikakun
         - if session["nickname"].nil?
-          p ようこそゲスト鹿
-          a.btn.loading href="/auth/twitter" ログイン
+          a.btn href="/auth/twitter" ログインする
         - else
           = session["nickname"]
-          a.btn.loading href="/logout" ログアウト
+          a.btn href="/logout" ログアウトする
           button#cancel.btn やめる
+      div
+        == yield
       ul.span3
         - @users.each do |users|
           li
