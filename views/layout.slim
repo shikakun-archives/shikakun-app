@@ -29,4 +29,7 @@ html lang="ja" dir="ltr"
           button#cancel.btn やめる
       ul.span3
         - @users.each do |users|
-          li #{users.nickname}
+          li
+            img src="#{users.image}"
+            #{users.nickname}
+            #{users.uid}

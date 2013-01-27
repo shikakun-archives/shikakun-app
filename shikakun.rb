@@ -21,7 +21,11 @@ class Users < Sequel::Model
   unless table_exists?
     DB.create_table :users do
       primary_key :id
+      String :uid
       String :nickname
+      String :image
+      String :token
+      String :secret
     end
   end
 end
@@ -63,7 +67,11 @@ end
 
 get "/auth/:provider/callback" do
   auth = request.env["omniauth.auth"]
-  session["nickname"] = auth["info"]["nickname"]
+  session['uid'] = auth['uid']
+  session['nickname'] = auth['info']['nickname']
+  session['image'] = auth['info']['image']
+  session['token'] = auth['credentials']['token']
+  session['secret'] = auth['credentials']['secret']
   redirect '/join'
 end
 
@@ -75,12 +83,18 @@ get '/join' do
     redirect '/'
   else
     if Users.filter(nickname: session["nickname"]).empty?
-      Users.find_or_create(:nickname => session["nickname"])
+      Users.find_or_create(
+        :uid => session['uid'],
+        :nickname => session['nickname'],
+        :image => session['image'],
+        :token => session['token'],
+        :secret => session['secret']
+      )
       tweet("鹿 さん、 #{session['nickname']} さんがshikakunに参加しました")
-      flash.next[:info] = shikatification
+      flash.next[:info] = "鹿 さん、 #{session['nickname']} さんがshikakunに参加しました"
       redirect '/'
     else
-      tweet("鹿 さん、 #{session['nickname']} さんがまたshikakunになりました")
+      flash.next[:info] = "鹿 さん、 #{session['nickname']} さんがまたshikakunになりました"
       redirect '/'
     end
   end
