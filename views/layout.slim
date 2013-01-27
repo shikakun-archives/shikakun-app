@@ -1,0 +1,32 @@
+doctype html
+html lang="ja" dir="ltr"
+  head
+    meta charset="UTF-8"
+    meta name="viewport" content="width=device-width, initial-scale=1.0"
+    meta name="keywords" content="shikakun"
+    meta name="description" content="shikakun"
+    title shikakun
+    link rel="stylesheet" type="text/css" media="screen" href="/css/bootstrap.min.css"
+    link rel="stylesheet" type="text/css" media="screen" href="/css/bootstrap-responsive.min.css"
+    link rel="stylesheet" type="text/css" media="screen" href="/css/stylesheet.css"
+    script type="text/javascript" src="http://www.google.com/jsapi"
+    script type="text/javascript" google.load("jquery", "1"); google.load("jqueryui", "1");
+    script type="text/javascript" src="/js/bootstrap.min.js"
+    script type="text/javascript" src="/js/js.js"
+    /[if lt IE 9]
+      script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"
+  body
+    div.container
+      == styled_flash
+      div
+        == yield
+        - if session["nickname"].nil?
+          p ようこそゲスト鹿
+          a.btn.loading href="/auth/twitter" ログイン
+        - else
+          = session["nickname"]
+          a.btn.loading href="/logout" ログアウト
+          button#cancel.btn やめる
+      ul.span3
+        - @users.each do |users|
+          li #{users.nickname}

@@ -58,12 +58,7 @@ end
 
 get "/" do
   @users = Users.order_by(:nickname.asc)
-  haml :index
-end
-
-get "/exit" do
-  @users = Users.order_by(:nickname.asc)
-  haml :exit
+  slim :index
 end
 
 get "/auth/:provider/callback" do
