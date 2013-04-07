@@ -5,7 +5,7 @@ gem 'omniauth-twitter'
 gem 'haml'
 gem 'slim'
 gem 'sequel'
-gem 'twitter'
+gem 'twitter', '~> 4.0'
 gem 'sinatra-flash', require: "sinatra/flash"
 gem 'shotgun'
 gem 'unicorn'
