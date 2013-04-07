@@ -8,6 +8,7 @@ gem 'sequel'
 gem 'twitter'
 gem 'sinatra-flash', require: "sinatra/flash"
 gem 'shotgun'
+gem 'unicorn'
 
 group :development do
   gem 'sqlite3'
